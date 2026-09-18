@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ambassade du Cameroun — Le Dossier Diplomatique</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ivory:#F5EFDD;
+    --ivory-line:#E1D6B2;
+    --deep:#3A3C59;
+    --deep-2:#494C70;
+    --deep-3:#53567F;
+    --gold:#D9A62B;
+    --gold-bright:#F0C862;
+    --crimson:#B21E34;
+    --ink:#16231C;
+    --ink-soft:#4B584F;
+    --mist:#9BAA9E;
+    /* Couleurs officielles du drapeau — charte graphique MINREX */
+    --flag-green:#007A33;
+    --flag-red:#CE1126;
+    --flag-yellow:#FCD116;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter', sans-serif;
+    background:var(--ivory);
+    color:var(--ink);
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%; display:block;}
+  a{color:inherit; text-decoration:none;}
+  .serif{font-family:'Fraunces', serif;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .folio-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.68rem;
+    letter-spacing:0.16em;
+    text-transform:uppercase;
+  }
+
+  /* ============ Ticker ============ */
+  .ticker-wrap{
+    background:var(--deep);
+    color:var(--gold-bright);
+    overflow:hidden;
+    white-space:nowrap;
+    border-bottom:1px solid var(--deep-3);
+  }
+  .ticker{
+    display:inline-flex;
+    padding:8px 0;
+    animation:scroll 32s linear infinite;
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.74rem;
+    letter-spacing:0.03em;
+  }
+  .ticker span{padding:0 32px; display:inline-flex; align-items:center; gap:10px; color:#DCE6DF;}
+  .ticker span::before{content:"◆"; color:var(--gold); font-size:0.6rem;}
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion: reduce){ .ticker{animation:none;} }
+
+  /* ============ Header : onglets de dossier ============ */
+  header.main{
+    background:var(--ivory);
+    position:relative;
+    padding-top:26px;
+  }
+  .header-inner{
+    max-width:1220px; margin:0 auto; padding:0 28px;
+    display:flex; justify-content:space-between; align-items:center;
+    padding-bottom:18px;
+  }
+  .brand{display:flex; align-items:center; gap:16px;}
+  .seal-mini{width:44px; height:44px; flex-shrink:0;}
+  .brand-text .country{font-size:1.3rem; font-weight:600;}
+  .brand-text .post{font-size:0.78rem; color:var(--ink-soft); font-family:'IBM Plex Mono', monospace; margin-top:2px;}
+  .lang-switch{display:flex; gap:14px; font-size:0.78rem; font-family:'IBM Plex Mono', monospace;}
+  .lang-switch a{opacity:0.55;}
+  .lang-switch a.active{opacity:1; border-bottom:1.5px solid var(--crimson);}
+
+  nav.tabs{
+    max-width:1220px; margin:0 auto; padding:0 20px;
+    display:flex; gap:6px; overflow-x:auto;
+  }
+  nav.tabs a{
+    font-size:0.86rem; font-weight:600;
+    padding:13px 20px 12px;
+    background:var(--ivory-line);
+    color:var(--ink-soft);
+    white-space:nowrap;
+    border-radius:8px 8px 0 0;
+    position:relative; top:1px;
+    transition:background .15s, color .15s;
+  }
+  nav.tabs a.active{
+    background:var(--deep);
+    color:var(--gold-bright);
+  }
+  nav.tabs a:not(.active):hover{background:#D8CCA4;}
+  .tabs-rule{height:3px; background:var(--deep);}
+
+  /* ============ Hero : sceau + grand titre ============ */
+  .hero{
+    background:var(--deep);
+    background-image:radial-gradient(circle at 82% 20%, rgba(217,166,43,0.16), transparent 55%);
+    color:var(--ivory);
+    position:relative;
+    padding:76px 0 90px;
+  }
+  .hero-inner{
+    max-width:1220px; margin:0 auto; padding:0 28px;
+    display:grid; grid-template-columns:1.15fr 0.85fr; gap:20px; align-items:center;
+    position:relative; z-index:2;
+  }
+  .hero .folio-tag{color:var(--gold);}
+  .hero h1{
+    font-size:clamp(2.3rem, 4.6vw, 3.6rem);
+    line-height:1.06;
+    font-weight:600;
+    margin:18px 0 22px;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 em{
+    font-style:italic; font-weight:400; color:var(--gold-bright);
+  }
+  .hero p{color:#C7D3C9; font-size:1.04rem; max-width:48ch; margin-bottom:30px;}
+  .hero-cta{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:14px 24px; font-size:0.86rem; font-weight:600;
+    border-radius:3px; transition:transform .15s, background .15s, border-color .15s;
+  }
+  .btn-primary{background:var(--gold); color:var(--deep);}
+  .btn-primary:hover{background:var(--gold-bright); transform:translateY(-2px);}
+  .btn-ghost{border:1.5px solid rgba(245,239,221,0.4); color:var(--ivory);}
+  .btn-ghost:hover{border-color:var(--gold); color:var(--gold-bright); transform:translateY(-2px);}
+
+  .seal-wrap{display:flex; align-items:center; justify-content:center; position:relative;}
+  .seal{width:100%; max-width:340px; animation:seal-in 900ms ease-out;}
+  @keyframes seal-in{ from{opacity:0; transform:scale(0.85) rotate(-8deg);} to{opacity:1; transform:scale(1) rotate(0deg);} }
+  .seal-wrap:hover .seal{ transform:rotate(6deg); transition:transform 600ms ease; }
+  @media (prefers-reduced-motion: reduce){ .seal{animation:none;} .seal-wrap:hover .seal{transform:none;} }
+
+  /* ============ Bento : accès rapide en fiches tamponnées ============ */
+  .bento-section{max-width:1220px; margin:-46px auto 0; padding:0 28px; position:relative; z-index:3;}
+  .bento{
+    display:grid;
+    grid-template-columns:repeat(6, 1fr);
+    gap:16px;
+  }
+  .card{
+    background:var(--ivory);
+    border:1px solid var(--ivory-line);
+    box-shadow:0 24px 48px -24px rgba(12,38,23,0.35);
+    padding:26px 24px;
+    position:relative;
+    transition:transform .18s, box-shadow .18s;
+  }
+  .card:hover{transform:translateY(-4px); box-shadow:0 28px 54px -22px rgba(12,38,23,0.45);}
+  .card.c-large{grid-column:span 3;}
+  .card.c-small{grid-column:span 3;}
+  @media (min-width:700px){
+    .card.c-small{grid-column:span 3;}
+  }
+  .card h3{font-size:1.12rem; margin:12px 0 8px; font-weight:600;}
+  .card p{font-size:0.86rem; color:var(--ink-soft);}
+  .card .stamp{
+    position:absolute; top:16px; right:16px;
+    width:34px; height:34px; border-radius:50%;
+    border:1.5px solid var(--crimson);
+    color:var(--crimson);
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:0.62rem; font-weight:500;
+    transform:rotate(-12deg);
+  }
+
+  /* ============ Section shell avec marge de dossier ============ */
+  section{max-width:1220px; margin:0 auto; padding:88px 28px 88px 78px; position:relative;}
+  .folio-margin{
+    position:absolute; left:24px; top:88px; bottom:auto;
+    writing-mode:vertical-rl; transform:rotate(180deg);
+    font-family:'IBM Plex Mono', monospace; font-size:0.68rem;
+    letter-spacing:0.14em; color:var(--ink-soft); text-transform:uppercase;
+  }
+  .section-head{
+    display:flex; justify-content:space-between; align-items:flex-end;
+    margin-bottom:38px; gap:20px; flex-wrap:wrap;
+  }
+  .section-head h2{font-size:2rem; font-weight:600;}
+  .section-head .folio-tag{color:var(--crimson); display:block; margin-bottom:10px;}
+  .see-all{font-size:0.84rem; font-weight:600; color:var(--ink); border-bottom:1.5px solid var(--gold); padding-bottom:2px;}
+
+  /* ============ Rail d'actualités horizontal ============ */
+  .news-rail{
+    display:flex; gap:24px; overflow-x:auto; padding-bottom:12px;
+    scroll-snap-type:x mandatory;
+  }
+  .news-rail::-webkit-scrollbar{height:6px;}
+  .news-rail::-webkit-scrollbar-thumb{background:var(--ivory-line);}
+  .news-card{
+    flex:0 0 340px; scroll-snap-align:start;
+    background:var(--deep); color:var(--ivory);
+    position:relative; padding:26px 24px 24px;
+    min-height:260px; display:flex; flex-direction:column; justify-content:flex-end;
+  }
+  .news-card::before{
+    content:""; position:absolute; top:20px; left:24px;
+    width:46px; height:46px; border-radius:50%;
+    border:1.5px dashed var(--gold);
+  }
+  .news-card .datebox{
+    position:absolute; top:20px; left:24px; width:46px; height:46px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; color:var(--gold-bright);
+  }
+  .news-card .datebox .d{font-size:1.1rem; font-weight:600; line-height:1;}
+  .news-card .datebox .m{font-size:0.58rem; text-transform:uppercase; letter-spacing:0.08em;}
+  .news-card h3{font-size:1.15rem; margin-bottom:10px; line-height:1.28;}
+  .news-card p{font-size:0.84rem; color:#B9C6BB;}
+
+  /* ============ Carte d'accréditation (Ambassadeur) ============ */
+  .credential{
+    background:var(--ivory);
+    border:1px solid var(--ivory-line);
+    display:grid; grid-template-columns:0.62fr 1.38fr;
+    box-shadow:0 30px 60px -30px rgba(12,38,23,0.3);
+  }
+  .credential-photo{
+    background:linear-gradient(165deg, var(--deep-3) 0%, var(--deep) 100%);
+    position:relative; min-height:340px;
+  }
+  .credential-photo::after{
+    content:""; position:absolute; inset:16px; border:1px solid rgba(217,166,43,0.5);
+  }
+  .credential-body{padding:44px 44px 40px; position:relative;}
+  .wax-stamp{position:absolute; top:-22px; right:36px; width:70px; height:70px;}
+  .credential-body .folio-tag{color:var(--crimson); margin-bottom:14px; display:block;}
+  .credential-body blockquote{
+    font-family:'Fraunces', serif; font-style:italic; font-weight:500;
+    font-size:1.32rem; line-height:1.45; color:var(--ink); margin-bottom:26px;
+  }
+  .sig{font-family:'Fraunces', serif; font-style:italic; font-size:1.3rem; color:var(--deep);}
+  .sig span{display:block; font-family:'IBM Plex Mono', monospace; font-style:normal; font-size:0.72rem; color:var(--ink-soft); margin-top:6px; text-transform:uppercase; letter-spacing:0.06em;}
+
+  /* ============ Registre de coopération (ledger) ============ */
+  .ledger{border-top:1.5px solid var(--ink);}
+  .ledger-row{
+    display:grid; grid-template-columns:80px 1fr 200px;
+    gap:20px; padding:20px 4px;
+    border-bottom:1px solid var(--ivory-line);
+    align-items:center;
+  }
+  .ledger-row:nth-child(odd){background:rgba(217,166,43,0.06);}
+  .ledger-row .ref{font-family:'IBM Plex Mono', monospace; font-size:0.76rem; color:var(--crimson);}
+  .ledger-row .label{font-size:0.98rem;}
+  .ledger-row .value{font-family:'Fraunces', serif; font-weight:600; font-size:1.3rem; text-align:right; color:var(--deep);}
+
+  /* ============ Pied de dossier ============ */
+  footer{background:var(--deep); color:#B9C6BB; position:relative; overflow:hidden;}
+  .footer-seal-watermark{
+    position:absolute; right:-60px; bottom:-60px; width:420px; height:420px;
+    opacity:0.06;
+  }
+  .footer-inner{
+    max-width:1220px; margin:0 auto; padding:70px 28px 34px;
+    display:grid; grid-template-columns:1.3fr 1fr 1fr 1fr; gap:44px;
+    position:relative; z-index:2;
+  }
+  .footer-inner h4{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem; letter-spacing:0.12em;
+    text-transform:uppercase; color:var(--gold-bright); margin-bottom:18px;
+  }
+  .footer-inner .country{color:var(--ivory); font-size:1.15rem;}
+  .footer-inner p, .footer-inner li{font-size:0.86rem; margin-bottom:11px; color:#A8B6AB;}
+  .footer-inner ul{list-style:none;}
+  .footer-inner a:hover{color:var(--gold-bright);}
+  .social-row{display:flex; gap:10px; margin-top:10px;}
+  .social-row a{
+    width:36px; height:36px; border:1px solid #2A4A35; border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    font-family:'IBM Plex Mono', monospace; font-size:0.7rem;
+  }
+  .social-row a:hover{border-color:var(--gold);}
+  .footer-bottom{
+    max-width:1220px; margin:0 auto; padding:22px 28px;
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;
+    border-top:1px solid #1E4530; font-size:0.76rem; color:#7C8C80;
+    position:relative; z-index:2;
+  }
+  .rule3{height:4px; display:flex; position:relative; z-index:2;}
+  .rule3 span{flex:1;}
+  .rule3 .g{background:var(--flag-green);} .rule3 .r{background:var(--flag-red);} .rule3 .y{background:var(--flag-yellow);}
+
+  /* ============ Bandeau institutionnel officiel (charte MINREX) ============ */
+  .gov-band{
+    background:var(--ink);
+    color:#DCE6DF;
+  }
+  .gov-band-inner{
+    max-width:1220px; margin:0 auto; padding:6px 28px;
+    display:flex; justify-content:space-between; align-items:center;
+    font-family:'IBM Plex Mono', monospace; font-size:0.66rem;
+    letter-spacing:0.08em; text-transform:uppercase;
+  }
+  .gov-band-inner .rep{display:flex; align-items:center; gap:10px;}
+  .gov-band-inner .rep .dot{width:6px; height:6px; border-radius:50%;}
+  .gov-band-inner .rep .dot.g{background:var(--flag-green);}
+  .gov-band-inner .rep .dot.r{background:var(--flag-red);}
+  .gov-band-inner .rep .dot.y{background:var(--flag-yellow);}
+  .gov-band-inner .domain{opacity:0.7;}
+  .gov-tricolor{height:3px; display:flex;}
+  .gov-tricolor span{flex:1;}
+  .gov-tricolor .g{background:var(--flag-green);} .gov-tricolor .r{background:var(--flag-red);} .gov-tricolor .y{background:var(--flag-yellow);}
+  @media (max-width:640px){ .gov-band-inner .domain{display:none;} }
+
+  /* ============ Barre de recherche ============ */
+  .search-wrap{position:relative; display:flex; align-items:center;}
+  .search-form{
+    display:flex; align-items:center; gap:8px;
+    background:var(--ivory-line); border-radius:20px;
+    padding:8px 14px; transition:background .15s;
+  }
+  .search-form:focus-within{background:#D8CCA4;}
+  .search-form svg{flex-shrink:0; opacity:0.6;}
+  .search-form input{
+    border:none; background:none; outline:none;
+    font-family:'Inter', sans-serif; font-size:0.82rem; color:var(--ink);
+    width:150px;
+  }
+  .search-form input::placeholder{color:var(--ink-soft);}
+  .search-status{
+    font-family:'IBM Plex Mono', monospace; font-size:0.72rem;
+    color:var(--ink-soft); text-align:center; padding:14px 0 0;
+  }
+  [data-search-hidden="true"]{display:none !important;}
+
+  /* ============ Localisation de l'ambassade ============ */
+  .locate{
+    display:grid; grid-template-columns:0.9fr 1.1fr; gap:0;
+    background:var(--ivory); border:1px solid var(--ivory-line);
+    box-shadow:0 30px 60px -30px rgba(12,38,23,0.3);
+  }
+  .locate-map{position:relative; min-height:360px; background:var(--deep-3);}
+  .locate-map iframe{width:100%; height:100%; min-height:360px; border:0; filter:saturate(0.85) contrast(1.02);}
+  .locate-map .pin-badge{
+    position:absolute; top:16px; left:16px; z-index:2;
+    background:var(--deep); color:var(--gold-bright);
+    font-family:'IBM Plex Mono', monospace; font-size:0.66rem; letter-spacing:0.08em;
+    text-transform:uppercase; padding:8px 12px; display:flex; align-items:center; gap:8px;
+    box-shadow:0 10px 20px -8px rgba(12,38,23,0.5);
+  }
+  .locate-body{padding:44px 40px; display:flex; flex-direction:column; justify-content:center; gap:22px;}
+  .locate-row{display:flex; gap:16px; align-items:flex-start;}
+  .locate-row svg{flex-shrink:0; margin-top:2px; color:var(--crimson);}
+  .locate-row h4{font-size:0.98rem; font-weight:600; margin-bottom:4px;}
+  .locate-row p{font-size:0.88rem; color:var(--ink-soft); line-height:1.5;}
+  .locate-cta{display:flex; gap:12px; flex-wrap:wrap; margin-top:6px;}
+  @media (max-width:860px){
+    .locate{grid-template-columns:1fr;}
+    .locate-map{min-height:260px;}
+    .locate-map iframe{min-height:260px;}
+    .locate-body{padding:32px 28px;}
+  }
+
+  @media (max-width:860px){
+    .hero-inner{grid-template-columns:1fr;}
+    .seal-wrap{max-width:220px; margin:0 auto;}
+    .bento{grid-template-columns:1fr 1fr;}
+    .card.c-large, .card.c-small{grid-column:span 2;}
+    .credential{grid-template-columns:1fr;}
+    .credential-photo{min-height:200px;}
+    section{padding-left:28px;}
+    .folio-margin{display:none;}
+    .ledger-row{grid-template-columns:50px 1fr auto;}
+    .footer-inner{grid-template-columns:1fr 1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="gov-band">
+  <div class="gov-band-inner">
+    <div class="rep">
+      <span class="dot g"></span><span class="dot r"></span><span class="dot y"></span>
+      RÉPUBLIQUE DU CAMEROUN <span style="opacity:0.5;">·</span> PAIX – TRAVAIL – PATRIE
+    </div>
+    <div class="domain">Site officiel · minrex.gov.cm</div>
+  </div>
+</div>
+<div class="gov-tricolor"><span class="g"></span><span class="r"></span><span class="y"></span></div>
+
+<div class="ticker-wrap">
+  <div class="ticker">
+    <span>AVIS — Fermeture exceptionnelle le [date] à l'occasion de [fête nationale]</span>
+    <span>NOUVEAU — Prise de rendez-vous consulaire désormais en ligne</span>
+    <span>COOPÉRATION — Signature d'un accord bilatéral le [date]</span>
+    <span>AVIS — Fermeture exceptionnelle le [date] à l'occasion de [fête nationale]</span>
+    <span>NOUVEAU — Prise de rendez-vous consulaire désormais en ligne</span>
+    <span>COOPÉRATION — Signature d'un accord bilatéral le [date]</span>
+  </div>
+</div>
+
+<header class="main">
+  <div class="header-inner">
+    <div class="brand">
+      <svg class="seal-mini" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="47" fill="none" stroke="#3A3C59" stroke-width="2"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#D9A62B" stroke-width="1"/>
+        <text x="50" y="24" font-family="IBM Plex Mono" font-size="6.2" fill="#3A3C59" text-anchor="middle" letter-spacing="1">REPUBLIQUE</text>
+        <path d="M50 40 L54 50 L50 60 L46 50 Z" fill="#B21E34"/>
+        <text x="50" y="80" font-family="IBM Plex Mono" font-size="6.2" fill="#3A3C59" text-anchor="middle" letter-spacing="1">DU CAMEROUN</text>
+      </svg>
+      <div class="brand-text">
+        <div class="country serif">Ambassade du Cameroun</div>
+        <div class="post">POSTE DE [PAYS HÔTE] · DOSSIER N° 01</div>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:22px;">
+      <div class="search-wrap">
+        <form class="search-form" id="site-search-form" role="search" onsubmit="return false;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" id="site-search-input" placeholder="Rechercher (visa, actualités…)" aria-label="Rechercher sur le site">
+        </form>
+      </div>
+      <div class="lang-switch">
+        <a href="#" class="active">FR</a>
+        <a href="#">EN</a>
+        <a href="#">[LOC]</a>
+      </div>
+    </div>
+  </div>
+  <nav class="tabs">
+    <a href="#" class="active">Accueil</a>
+    <a href="#">L'Ambassade</a>
+    <a href="#">Services consulaires</a>
+    <a href="#">Actualités</a>
+    <a href="#">Coopération</a>
+    <a href="#">Ressortissants</a>
+    <a href="#localisation">Localisation</a>
+    <a href="#">Contact</a>
+  </nav>
+  <div class="tabs-rule"></div>
+  <p class="search-status" id="search-status" style="display:none;"></p>
+</header>
+
+<section class="hero" style="padding-left:0; padding-right:0; margin:0; max-width:none;">
+  <div class="hero-inner">
+    <div>
+      <span class="folio-tag">Dossier N° 01 — Accréditation &amp; mission</span>
+      <h1 class="serif">Le Cameroun accrédité à <em>[Pays hôte]</em>.<br>Une mission, un dossier, une parole.</h1>
+      <p>Chaque service rendu, chaque accord signé, chaque ressortissant accompagné devient une page de ce dossier vivant — le registre officiel de la représentation camerounaise.</p>
+      <div class="hero-cta">
+        <a href="#" class="btn btn-primary">Ouvrir un dossier consulaire</a>
+        <a href="#" class="btn btn-ghost">Lire les actualités</a>
+      </div>
+    </div>
+    <div class="seal-wrap">
+      <svg class="seal" viewBox="0 0 300 300">
+        <circle cx="150" cy="150" r="140" fill="none" stroke="#D9A62B" stroke-width="1.2" stroke-dasharray="2 5"/>
+        <circle cx="150" cy="150" r="118" fill="none" stroke="var(--flag-green)" stroke-width="10" opacity="0.92"/>
+        <circle cx="150" cy="150" r="104" fill="none" stroke="var(--flag-red)" stroke-width="10" opacity="0.92"/>
+        <circle cx="150" cy="150" r="90" fill="none" stroke="var(--flag-yellow)" stroke-width="10" opacity="0.95"/>
+        <circle cx="150" cy="150" r="74" fill="#3A3C59" stroke="var(--flag-yellow)" stroke-width="1.5"/>
+        <path d="M150 118 L160 145 L150 172 L140 145 Z" fill="var(--flag-yellow)"/>
+        <text x="150" y="150" font-family="IBM Plex Mono" font-size="9" fill="#F5EFDD" text-anchor="middle" letter-spacing="2">RÉP. DU CAMEROUN</text>
+        <path id="circletext" d="M 150,150 m -128,0 a 128,128 0 1,1 256,0 a 128,128 0 1,1 -256,0" fill="none"/>
+        <text font-family="IBM Plex Mono" font-size="10" fill="#F5EFDD" letter-spacing="3">
+          <textPath href="#circletext">AMBASSADE • PAIX – TRAVAIL – PATRIE • AMBASSADE • </textPath>
+        </text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div class="bento-section">
+  <div class="bento">
+    <div class="card c-large" data-search>
+      <div class="stamp">VISA</div>
+      <span class="folio-tag" style="color:var(--crimson);">Service 01</span>
+      <h3 class="serif">Demander un visa</h3>
+      <p>Formulaire, pièces requises et délais de traitement pour entrer sur le territoire camerounais.</p>
+    </div>
+    <div class="card c-large" data-search>
+      <div class="stamp">CC</div>
+      <span class="folio-tag" style="color:var(--crimson);">Service 02</span>
+      <h3 class="serif">Carte consulaire</h3>
+      <p>Inscription, renouvellement et suivi de dossier pour les ressortissants établis à l'étranger.</p>
+    </div>
+    <div class="card c-small" data-search>
+      <span class="folio-tag" style="color:var(--crimson);">Service 03</span>
+      <h3 class="serif">Légalisation</h3>
+      <p>Authentification de documents administratifs et académiques.</p>
+    </div>
+    <div class="card c-small" data-search>
+      <span class="folio-tag" style="color:var(--crimson);">Service 04</span>
+      <h3 class="serif">Urgence 24/7</h3>
+      <p>Assistance aux ressortissants en difficulté, à toute heure.</p>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="folio-margin">Dossier N° 02 — Actualités</div>
+  <div class="section-head">
+    <div>
+      <span class="folio-tag">Chronique de la mission</span>
+      <h2 class="serif">Actualités</h2>
+    </div>
+    <a href="#" class="see-all">Consulter le registre complet →</a>
+  </div>
+  <div class="news-rail">
+    <article class="news-card" data-search>
+      <div class="datebox"><span class="d">12</span><span class="m">Août</span></div>
+      <h3 class="serif">Signature d'un accord de coopération bilatérale</h3>
+      <p>Un nouveau protocole renforce les échanges dans le secteur [ex. formation].</p>
+    </article>
+    <article class="news-card" data-search>
+      <div class="datebox"><span class="d">03</span><span class="m">Août</span></div>
+      <h3 class="serif">Journée culturelle de la diaspora</h3>
+      <p>Retour en images sur la mobilisation de la communauté camerounaise.</p>
+    </article>
+    <article class="news-card" data-search>
+      <div class="datebox"><span class="d">28</span><span class="m">Juil.</span></div>
+      <h3 class="serif">Note aux ressortissants</h3>
+      <p>Ajustement temporaire des horaires d'ouverture de la chancellerie.</p>
+    </article>
+    <article class="news-card" data-search>
+      <div class="datebox"><span class="d">15</span><span class="m">Juil.</span></div>
+      <h3 class="serif">Réception à l'occasion de la fête nationale</h3>
+      <p>La mission a réuni partenaires institutionnels et diaspora.</p>
+    </article>
+  </div>
+</section>
+
+<section class="ambassador" style="padding-top:0;">
+  <div class="folio-margin">Dossier N° 03 — Accréditation</div>
+  <div class="section-head">
+    <div>
+      <span class="folio-tag">Parole de la mission</span>
+      <h2 class="serif">Mot de l'Ambassadeur</h2>
+    </div>
+  </div>
+  <div class="credential">
+    <div class="credential-photo"></div>
+    <div class="credential-body">
+      <svg class="wax-stamp" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="46" fill="#B21E34"/>
+        <circle cx="50" cy="50" r="38" fill="none" stroke="#F0C862" stroke-width="1"/>
+        <path d="M50 30 L56 46 L50 62 L44 46 Z" fill="#F0C862"/>
+      </svg>
+      <span class="folio-tag">Signature accréditée</span>
+      <blockquote>« Notre mission est de porter la voix du Cameroun avec constance, d'accompagner chaque ressortissant avec rigueur, et de faire de cette représentation un pont vivant entre nos deux nations. »</blockquote>
+      <div class="sig">S.E. [Nom de l'Ambassadeur]<span>Ambassadeur extraordinaire et plénipotentiaire</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="folio-margin">Dossier N° 04 — Registre</div>
+  <div class="section-head">
+    <div>
+      <span class="folio-tag">Relations bilatérales</span>
+      <h2 class="serif">Registre de coopération Cameroun – [Pays hôte]</h2>
+    </div>
+  </div>
+  <div class="ledger">
+    <div class="ledger-row" data-search>
+      <span class="ref mono">§ 01</span>
+      <span class="label">Accords bilatéraux actuellement en vigueur</span>
+      <span class="value">[N]</span>
+    </div>
+    <div class="ledger-row" data-search>
+      <span class="ref mono">§ 02</span>
+      <span class="label">Portefeuille de coopération actif</span>
+      <span class="value">[N] M$</span>
+    </div>
+    <div class="ledger-row" data-search>
+      <span class="ref mono">§ 03</span>
+      <span class="label">Ressortissants camerounais recensés</span>
+      <span class="value">[N]</span>
+    </div>
+    <div class="ledger-row" data-search>
+      <span class="ref mono">§ 04</span>
+      <span class="label">Établissement des relations diplomatiques</span>
+      <span class="value">[Année]</span>
+    </div>
+  </div>
+</section>
+
+<section id="localisation">
+  <div class="folio-margin">Dossier N° 05 — Localisation</div>
+  <div class="section-head">
+    <div>
+      <span class="folio-tag">Trouver la mission</span>
+      <h2 class="serif">Localisation de l'Ambassade</h2>
+    </div>
+  </div>
+  <div class="locate">
+    <div class="locate-map">
+      <div class="pin-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+        Ambassade du Cameroun
+      </div>
+      <!-- Remplacer bbox et marker par les coordonnées réelles du poste ([lat],[lon]) -->
+      <iframe
+        src="https://www.openstreetmap.org/export/embed.html?bbox=-1.85%2C52.45%2C-1.83%2C52.47&layer=mapnik&marker=52.46%2C-1.84"
+        loading="lazy"
+        title="Localisation de l'Ambassade du Cameroun"
+        aria-label="Carte de localisation de l'ambassade">
+      </iframe>
+    </div>
+    <div class="locate-body">
+      <div class="locate-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2C7.6 2 4 5.6 4 10c0 6 8 12 8 12s8-6 8-12c0-4.4-3.6-8-8-8zm0 11a3 3 0 110-6 3 3 0 010 6z"/></svg>
+        <div>
+          <h4>Adresse</h4>
+          <p>[Adresse complète]<br>[Ville, Code postal] — [Pays hôte]</p>
+        </div>
+      </div>
+      <div class="locate-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        <div>
+          <h4>Horaires d'accueil du public</h4>
+          <p>Lundi – Vendredi : [09h00 – 15h00]<br>Fermé les jours fériés locaux et camerounais.</p>
+        </div>
+      </div>
+      <div class="locate-row">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.13.96.36 1.9.68 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.9.32 1.85.55 2.81.68A2 2 0 0122 16.92z"/></svg>
+        <div>
+          <h4>Contact</h4>
+          <p>Tél. [+xxx xx xxx xxxx]<br>[email]@minrex.gov.cm</p>
+        </div>
+      </div>
+      <div class="locate-cta">
+        <a href="https://www.google.com/maps/dir/?api=1&destination=[lat],[lon]" target="_blank" rel="noopener" class="btn btn-primary" style="background:var(--deep); color:var(--ivory);">Itinéraire</a>
+        <a href="#" class="btn btn-ghost" style="border-color:var(--ivory-line); color:var(--ink);">Prendre rendez-vous</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <svg class="footer-seal-watermark" viewBox="0 0 300 300">
+    <circle cx="150" cy="150" r="140" fill="none" stroke="#F5EFDD" stroke-width="2"/>
+    <circle cx="150" cy="150" r="100" fill="none" stroke="#F5EFDD" stroke-width="8"/>
+    <path d="M150 110 L165 150 L150 190 L135 150 Z" fill="#F5EFDD"/>
+  </svg>
+  <div class="footer-inner">
+    <div>
+      <div class="country serif">Ambassade du Cameroun</div>
+      <p style="margin-top:14px; color:#8FA093;">à [Nom du pays hôte]</p>
+      <p>[Adresse complète]<br>[Ville, Code postal]</p>
+      <p>Tél. [+xxx xx xxx xxxx] · [email]@minrex.gov.cm</p>
+      <div class="social-row">
+        <a href="#" title="Facebook">f</a>
+        <a href="#" title="X / Twitter">X</a>
+        <a href="#" title="Instagram">ig</a>
+        <a href="#" title="LinkedIn">in</a>
+      </div>
+    </div>
+    <div>
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#">Visas</a></li>
+        <li><a href="#">Carte consulaire</a></li>
+        <li><a href="#">État civil</a></li>
+        <li><a href="#">Légalisation</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>La Mission</h4>
+      <ul>
+        <li><a href="#">L'Ambassadeur</a></li>
+        <li><a href="#">Coopération bilatérale</a></li>
+        <li><a href="#">Actualités</a></li>
+        <li><a href="#">Presse</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Institutionnel</h4>
+      <ul>
+        <li><a href="#">MINREX</a></li>
+        <li><a href="#">Présidence de la République</a></li>
+        <li><a href="#">Portail DIPLOMAT</a></li>
+        <li><a href="#">Mentions légales</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="rule3"><span class="g"></span><span class="r"></span><span class="y"></span></div>
+  <div class="footer-bottom">
+    <span>© [Année] Ambassade du Cameroun à [Pays]. Tous droits réservés.</span>
+    <span>Gabarit officiel MINREX — édition « Dossier Diplomatique » v2.0</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var input = document.getElementById('site-search-input');
+  var status = document.getElementById('search-status');
+  var items = Array.prototype.slice.call(document.querySelectorAll('[data-search]'));
+
+  input.addEventListener('input', function(){
+    var q = input.value.trim().toLowerCase();
+
+    if(q === ''){
+      items.forEach(function(el){ el.removeAttribute('data-search-hidden'); });
+      status.style.display = 'none';
+      return;
+    }
+
+    var visible = 0;
+    items.forEach(function(el){
+      var match = el.innerText.toLowerCase().indexOf(q) !== -1;
+      if(match){ el.removeAttribute('data-search-hidden'); visible++; }
+      else{ el.setAttribute('data-search-hidden', 'true'); }
+    });
+
+    status.style.display = 'block';
+    status.textContent = visible === 0
+      ? 'Aucun résultat pour « ' + input.value.trim() + ' »'
+      : visible + ' résultat' + (visible > 1 ? 's' : '') + ' pour « ' + input.value.trim() + ' »';
+  });
+
+  input.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ input.value=''; input.dispatchEvent(new Event('input')); input.blur(); }
+  });
+})();
+</script>
+
+</body>
+</html>
